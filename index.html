@@ -99,6 +99,7 @@
   .char-hidden {
     opacity: 0;
   }
+
 </style>
 </head>
 <body class="bg-slate-900 min-h-screen flex items-center justify-center overflow-hidden">
@@ -162,28 +163,17 @@
 
           <!-- Back face: lined paper for text -->
           <div id="card-back"
-               class="card-face card-back absolute inset-0 overflow-hidden flex items-center justify-center"
+               class="card-face card-back absolute inset-0 overflow-y-auto"
                style="transform: rotateY(180deg);
                       background-color: #faf9f6;
                       background-image: repeating-linear-gradient(to bottom, transparent, transparent 39px, #cbd5e1 39px, #cbd5e1 40px);">
             <div id="typed-target"
-                 class="text-slate-700 text-center px-8 w-full"
+                 class="text-slate-700 text-left px-8 w-full"
                  style="font-family: 'Noto Serif SC', 'Ma Shan Zheng', serif; min-height: 80px; font-size: 1.05rem;"></div>
           </div>
 
         </div>
       </div>
-
-      <!-- Final button (below card; hidden until typing completes) -->
-      <button id="final-btn"
-        class="relative px-10 py-3 text-base text-white font-medium rounded-full
-               bg-gradient-to-r from-rose-500 to-pink-500
-               transition-all duration-500 ease-out
-               hover:scale-105 hover:shadow-lg hover:shadow-pink-500/30
-               focus:outline-none"
-        style="opacity: 0; pointer-events: none; animation: glowPulse 3s ease-in-out infinite;">
-        开启最终仪式
-      </button>
 
     </div>
   </div>
@@ -204,7 +194,6 @@
   const cardWrapper = document.getElementById('card-wrapper');
   const cardFront = document.getElementById('card-front');
   const typedTarget = document.getElementById('typed-target');
-  const finalBtn = document.getElementById('final-btn');
 
   let locked = false; // prevents input after success
 
@@ -257,10 +246,14 @@
   // ---- Phase 2 ----
 
   const LETTER_TEXT =
-    '亲爱的你：\n\n' +
-    '今天是一年中最特别的日子，属于你的日子。\n\n' +
-    '愿所有美好如期而至，愿你眼里有光，心中有爱。\n\n' +
-    '生日快乐。';
+    '小吴同学：\n\n' +
+    '\u3000\u3000这是一张赛博贺卡，起因是我买礼物的商家不给我放一张小贺卡，于是我想到做一张这样特殊的贺卡，这样还能防止走失哈哈哈\n' +
+    '\u3000\u3000能感觉出来你肯定很忙，但是被你之前"专心经营自己的懵逼生活"的强大精神内核折服过，我相信你都可以做到\n' +
+    '\u3000\u3000所以今天这个属于寿星的日子我更希望你好好保重身体，作为熬夜+随机饭点爱好者能好好睡觉按时吃饭\n' +
+    '\u3000\u3000辛苦了！无论去向何方，无论未来在哪里，我们都要加油\n' +
+    '\u3000\u3000最后还是要祝你所求皆如愿，所行化坦途！\n' +
+    '\u3000\u3000明年我们相逢意气为君饮，系马高楼垂柳边。不许再鸽٩(｡・ω・｡)﻿و\n' +
+    '\u3000\u3000生日快乐!';
 
   function showPhase2() {
     phase2Container.style.display = 'flex';
@@ -316,15 +309,7 @@
 
     // After flip completes, render text on the back face
     setTimeout(function () {
-      var charCount = renderMagicText(LETTER_TEXT, 'typed-target');
-
-      var textAnimMs = (charCount - 1) * 80 + 600;
-      var buttonDelay = textAnimMs + 2000;
-
-      setTimeout(function () {
-        finalBtn.style.opacity = '1';
-        finalBtn.style.pointerEvents = 'auto';
-      }, buttonDelay);
+      renderMagicText(LETTER_TEXT, 'typed-target');
     }, 1200);
   });
 
