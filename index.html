@@ -253,7 +253,9 @@
     '\u3000\u3000辛苦了！无论去向何方，无论未来在哪里，我们都要加油\n' +
     '\u3000\u3000最后还是要祝你所求皆如愿，所行化坦途！\n' +
     '\u3000\u3000明年我们相逢意气为君饮，系马高楼垂柳边。不许再鸽٩(｡・ω・｡)﻿و\n' +
-    '\u3000\u3000生日快乐!';
+    '\u3000\u3000生日快乐!\n' + 
+    '[R]况煜景\n'+
+    '[R]2026.6.22';
 
   function showPhase2() {
     phase2Container.style.display = 'flex';
@@ -279,7 +281,16 @@
         return;
       }
 
+      var isRightAligned = line.indexOf('[R]') === 0;
+      if (isRightAligned) {
+        line = line.slice(3);
+      }
+
       var lineDiv = document.createElement('div');
+      if (isRightAligned) {
+        lineDiv.style.textAlign = 'right';
+        lineDiv.style.paddingRight = '20px';
+      }
 
       for (var i = 0; i < line.length; i++) {
         var span = document.createElement('span');
